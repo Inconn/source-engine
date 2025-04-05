@@ -137,10 +137,23 @@ CUtlBlockMemory<T,I>::~CUtlBlockMemory()
 template< class T, class I >
 void CUtlBlockMemory<T,I>::Swap( CUtlBlockMemory< T, I > &mem )
 {
-	this->swap( m_pMemory, mem.m_pMemory );
-	this->swap( m_nBlocks, mem.m_nBlocks );
-	this->swap( m_nIndexMask, mem.m_nIndexMask );
-	this->swap( m_nIndexShift, mem.m_nIndexShift );
+	T** temp_pMemory = m_pMemory;
+	int temp_nBlocks = m_nBlocks;
+	int temp_nIndexMask = m_nIndexMask;
+	int temp_nIndexShift = m_nIndexShift;
+	m_pMemory = mem.m_pMemory;
+	m_nBlocks = mem.m_nBlocks;
+	m_nIndexMask = mem.m_nIndexMask;
+	m_nIndexShift = mem.m_nIndexShift;
+	mem.m_pMemory = temp_pMemory;
+	mem.m_nBlocks = temp_nBlocks;
+	mem.m_nIndexMask = temp_nIndexMask;
+	mem.m_nIndexShift = temp_nIndexShift;
+
+	//this->swap( m_pMemory, mem.m_pMemory );
+	//this->swap( m_nBlocks, mem.m_nBlocks );
+	//this->swap( m_nIndexMask, mem.m_nIndexMask );
+	//this->swap( m_nIndexShift, mem.m_nIndexShift );
 }
 
 
